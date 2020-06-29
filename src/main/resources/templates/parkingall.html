@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Parking Detail</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<img src="parking_logo.jpg" style="float:right;width:256px;height:256px" alt="Logo" />
+<!--<p><em>Photo by Balaram</em></p>-->
+<h2>Parking Detail</h2>
+<table id="parking">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Lot Number</th>
+        <th>Entry Time</th>
+        <th>Exit Time</th>
+        <th>Card Number</th>
+        <th>Vehicle Regd Number</th>
+
+    </tr>
+    </thead>
+    <tr th:border="1" style="width: 50%"
+        th:each="p : ${parkings}">
+        <td th:text="${p.id}">id</td>
+        <td th:text="${p.lotNum}">lotNum</td>
+        <td th:text="${p.entryTime}">entryTime</td>
+        <td th:text="${p.exitTime}">exitTime</td>
+        <td th:text="${p.cardNum}">cardNum</td>
+        <td th:text="${p.vcleRegdNum}">vcleRegdNum</td>
+
+
+    </tr>
+</table>
+
+<!--<h2>Entry</h2>-->
+<!--<div>-->
+<!--    <form method="post" th:object="${ParkingInfo}">-->
+<!--        <label for="name">Name</label>-->
+<!--        <input type="text" id="name" name="name"-->
+<!--               placeholder="Product name" th:field="*{name}">-->
+<!--        <span class="validationError"-->
+<!--              th:if="${#fields.hasErrors('name')}"-->
+<!--              th:errors="*{name}">Name Error</span>-->
+
+<!--        <label for="price">Price</label>-->
+<!--        <input type="text" id="price" name="price"-->
+<!--               placeholder="Price" th:field="*{price}">-->
+<!--        <span class="validationError"-->
+<!--              th:if="${#fields.hasErrors('price')}"-->
+<!--              th:errors="*{price}">Price Error</span>-->
+
+<!--        <input th:type="submit" value="Submit">-->
+<!--    </form>-->
+<!--</div>-->
+</body>
+</html>
