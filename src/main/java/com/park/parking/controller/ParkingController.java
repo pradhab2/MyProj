@@ -1,4 +1,5 @@
 package com.park.parking.controller;
+import com.park.parking.entity.IdNotFoundException;
 import com.park.parking.entity.ParkingInfo;
 import com.park.parking.model.Availability;
 import com.park.parking.config.Utility;
@@ -9,14 +10,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.PriorityQueue;
 
 
@@ -72,7 +77,16 @@ import java.util.PriorityQueue;
             return avblSpot;
         }
 
-       @ResponseBody
+
+
+        @GetMapping("/parking")
+
+        public Iterable<ParkingInfo> showAll(){
+
+            Iterable<ParkingInfo> pi=repo.findAll();
+            return pi;
+        }
+
         @PostMapping("/parking")
 //        ParkingInfo chkIn(@RequestParam (value="vcleRegdNum",required=true)String vcleRegdNum ) {
 //            http://localhost:8080/parking/?vcleRegdNum=5XYL169
@@ -108,18 +122,51 @@ import java.util.PriorityQueue;
 
         }
 
+        @PutMapping("/parking")
+        public ResponseEntity chkOut(@RequestBody ParkingInfoDTO dl, Errors errors) {
 
-//        @ResponseBody
-        @GetMapping("/parking")
+            ParkingInfo po = new ParkingInfo();
 
-        public Iterable<ParkingInfo> showAll(){
+            po.setExitTime(new Timestamp(System.currentTimeMillis()));
 
-            Iterable<ParkingInfo> pi=repo.findAll();
-            return pi;
+            po.setCardNum(dl.getCardNum());
+            po.setId(dl.getId());
+            logger.info("Updating parking Exit info: "+dl);
+
+            try {
+                repo.extUpd(po.getId(),po.getExitTime(),po.getCardNum());
+
+                utl.prq.add(po.getId());
+            }
+            catch( Exception e){
+                e.printStackTrace();
+                return new ResponseEntity(new String( "Error during update"),HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity(po, HttpStatus.OK);
+
         }
 
 
+        @DeleteMapping("/parking")
 
+        public ResponseEntity delById(@RequestBody ParkingInfoDTO pi) {
+            Optional<ParkingInfo> pr = repo.findById(pi.getId());
+
+            logger.info("Deleting ID: " + pr.get().getId());
+            try {
+                if (pr.isPresent()) {
+                    repo.deleteById(pi.getId());
+                } else {
+                    throw new IdNotFoundException(pi.getId());
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new ResponseEntity(new String("No ID Found for delete"), HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity(pi, HttpStatus.OK);
+
+        }
 
 
     }

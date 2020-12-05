@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Metafdata Detail</title>
+    <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+<img src="Visa-Logo.png" style="float:right;width:190px;height:100px" alt="Logo" />
+<!--<p><em>Photo by Balaram</em></p>-->
+<h2 style="color:#069"> <br><p style="text-align:center">Welcome To Data Dictionary Portal</p></h2>
+
+
+<h3 ><font style="color:#006699;font-family:Arial;">Get Abbreviation</font></h3>
+<div>
+
+    <form th:action="@{/meta}" method="post" th:object="${mi}">
+        <label for="inpFldNm" style="color:#069;font-family:verdana; font-size:14px;" >Enter the Field Name</label>
+        <input type="text" id="inpFldNm" name="inpFldNm">
+
+        <input th:type="submit" value="Submit" style="font-family:arial;font-size:14px">
+    </form>
+</div>
+
+<h3 style="color:#006699;font-family:Arial;"> Details </h3>
+<table id="tmetadata">
+    <thead>
+    <tr>
+        <th style="font-family:arial;font-size:14px">Actual Field Name</th>
+        <th style="font-family:arial;font-size:14px">Recommended Field Name</th>
+    </tr>
+    </thead>
+    <tr th:border="1" style="width: 50%"
+        th:each="p : ${metadata}">
+        <td th:text="${p.dbFldNm}">dbFldNm</td>
+        <td th:text="${p.recmFldNm}">recmFldNm</td>
+
+
+    </tr>
+</table>
+
+<h3 ><font style="color:#006699;font-family:Arial;"><br>Validate Name</font></h3>
+<div>
+
+    <form th:action="@{/meta}" method="post" th:object="${pi}">
+        <label for="inpFldNm" style="color:#069;font-family:verdana; font-size:14px;" >Enter the Field Name</label>
+        <input type="text" id="inpFldNm2" name="inpFldNm2">
+
+        <input th:type="submit" value="Submit" style="font-family:arial;font-size:14px">
+    </form>
+</div>
+
+
+    </form>
+</div>
+</body>
+</html>

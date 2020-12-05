@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Parking Detail</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<img src="parking_logo.jpg" style="float:right;width:256px;height:256px" alt="Logo" />
+<!--<p><em>Photo by Balaram</em></p>-->
+
+<h2>Check In</h2>
+<div>
+    <form method="post" th:object="${pi}">
+        <label for="vcleRegdNum">Vehicle Regd Num</label>
+        <input type="text" id="vcleRegdNum" name="vcleRegdNum">
+<!--        <input value="insrt"  name="type">-->
+<!--        <input name="type" type="hidden" value="insrt" />-->
+<!--               placeholder="Vehicle Regd Num" th:field="*{vcleRegdNum}">-->
+<!--        <span class="validationError"-->
+<!--              th:if="${#fields.hasErrors('vcleRegdNum')}"-->
+<!--              th:errors="*{vcleRegdNum}">Name Error</span>-->
+
+<!--        <label for="price">Price</label>-->
+<!--        <input type="text" id="price" name="price"-->
+<!--               placeholder="Price" th:field="*{price}">-->
+<!--        <span class="validationError"-->
+<!--              th:if="${#fields.hasErrors('price')}"-->
+<!--              th:errors="*{price}">Price Error</span>-->
+
+        <input value="submit" value="Checkin">
+    </form>
+</div>
+
+</body>
+</html>

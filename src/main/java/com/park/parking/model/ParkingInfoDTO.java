@@ -70,7 +70,17 @@ public class ParkingInfoDTO {
     @JsonProperty("cardNum")
     private Integer cardNum ;
     @JsonProperty("vcleRegdNum")
-    @NotBlank(message ="Veichle Regd Number can not be blank")
+   // @NotBlank(message ="Vehicle Regd Number can not be blank")
     private String vcleRegdNum;
+    @JsonProperty("type")
+    private String type ;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }
 

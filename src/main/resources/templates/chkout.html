@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Parking Detail</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<img src="parking_logo.jpg" style="float:right;width:256px;height:256px" alt="Logo" />
+<!--<p><em>Photo by Balaram</em></p>-->
+
+<h2>Check Out</h2>
+<div>
+    <form method="post" th:object="${dl}">
+        <label for="id">Enter the ID</label>
+        <input type="text" id="id" name="id">
+        <label for="cardNum">Enter the Card Num</label>
+        <input type="text" id="cardNum" name="cardNum">
+<!--        <input id="updt"  name="type">-->
+<!--        <input name="type" type="hidden" value="updt" />-->
+        <input th:type="submit" value="Checkout">
+
+    </form>
+</div>
+</body>
+</html>
